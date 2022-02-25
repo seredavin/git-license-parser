@@ -1,0 +1,19 @@
+spring:
+  kafka:
+    bootstrap-servers: ${kafka_bootstrap_servers:192.168.88.73:9093}
+    properties:
+      sasl:
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username=${kafka_username:'admin'} password=${kafka_password:'admin-secret'};
+        mechanism: PLAIN
+      security:
+        protocol: PLAINTEXT
+    producer:
+      client-id: git-license-parser
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      retries: 2
+    jaas:
+      enabled: true
+server:
+  port: 8081
